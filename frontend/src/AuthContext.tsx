@@ -19,16 +19,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (email: string, password: string) => {
     const { data } = await api.post('/auth/login', { email, password });
-    localStorage.setItem('sf_token', data.access_token);
-    localStorage.setItem('sf_user', JSON.stringify(data.user));
-    setUser(data.user);
+    localStorage.setItem('sf_token', data.data.access_token);
+    localStorage.setItem('sf_user', JSON.stringify(data.data.user));
+    setUser(data.data.user);
   };
 
   const signup = async (email: string, password: string, orgName: string) => {
     const { data } = await api.post('/auth/signup', { email, password, orgName });
-    localStorage.setItem('sf_token', data.access_token);
-    localStorage.setItem('sf_user', JSON.stringify(data.user));
-    setUser(data.user);
+    localStorage.setItem('sf_token', data.data.access_token);
+    localStorage.setItem('sf_user', JSON.stringify(data.data.user));
+    setUser(data.data.user);
   };
 
   const logout = () => {

@@ -24,8 +24,8 @@ export default function ProductsPage() {
         api.get('/products'),
         api.get('/settings'),
       ]);
-      setProducts(prods.data);
-      setGlobalThreshold(settings.data.lowStockDefault);
+      setProducts(prods.data.data);
+      setGlobalThreshold(settings.data.data.lowStockDefault);
     } finally {
       setLoading(false);
     }

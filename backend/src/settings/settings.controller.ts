@@ -1,4 +1,4 @@
-import { Controller, Get, Put, Body, UseGuards, Request } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Logger, Put, Req, Res, UseGuards } from '@nestjs/common';
 import { IsInt, Min } from 'class-validator';
 import { Type } from 'class-transformer';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -14,15 +14,29 @@ class UpdateSettingsDto {
 @Controller('settings')
 @UseGuards(JwtAuthGuard)
 export class SettingsController {
+  private logger = new Logger(SettingsController.name);
+
   constructor(private settingsService: SettingsService) {}
 
   @Get()
-  get(@Request() req) {
-    return this.settingsService.get(req.user.orgId);
+  async get(@Req() req, @Res() res) {
+    try {
+      const data = await this.settingsService.get(req.user.orgId);
+      res.status(HttpStatus.OK).send({ message: 'success', data });
+    } catch (e) {
+      this.logger.error(e);
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({ message: 'Service unavailable', data: {} });
+    }
   }
 
   @Put()
-  update(@Request() req, @Body() dto: UpdateSettingsDto) {
-    return this.settingsService.update(req.user.orgId, dto.lowStockDefault);
+  async update(@Req() req, @Res() res, @Body() dto: UpdateSettingsDto) {
+    try {
+      const data = await this.settingsService.update(req.user.orgId, dto.lowStockDefault);
+      res.status(HttpStatus.OK).send({ message: 'success', data });
+    } catch (e) {
+      this.logger.error(e);
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({ message: 'Service unavailable', data: {} });
+    }
   }
 }

@@ -14,7 +14,7 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/dashboard').then((r) => { setData(r.data); setLoading(false); }).catch(() => setLoading(false));
+    api.get('/dashboard').then((r) => { setData(r.data.data); setLoading(false); }).catch(() => setLoading(false));
   }, []);
 
   if (loading) return <div className="loading"><div className="spinner" /> Loading dashboard…</div>;

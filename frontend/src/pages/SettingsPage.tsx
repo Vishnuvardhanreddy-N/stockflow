@@ -10,7 +10,7 @@ export default function SettingsPage() {
 
   useEffect(() => {
     api.get('/settings').then((r) => {
-      setThreshold(r.data.lowStockDefault);
+      setThreshold(r.data.data.lowStockDefault);
       setLoading(false);
     });
   }, []);
