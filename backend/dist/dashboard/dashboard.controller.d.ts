@@ -4,17 +4,7 @@ import { SettingsService } from '../settings/settings.service';
 export declare class DashboardController {
     private productRepo;
     private settingsService;
+    private logger;
     constructor(productRepo: Repository<Product>, settingsService: SettingsService);
-    getSummary(req: any): Promise<{
-        totalProducts: number;
-        totalUnits: number;
-        lowStockCount: number;
-        lowStockItems: {
-            id: string;
-            name: string;
-            sku: string;
-            quantity: number;
-            lowStockThreshold: number;
-        }[];
-    }>;
+    getSummary(req: any, res: any): Promise<void>;
 }

@@ -4,8 +4,9 @@ declare class UpdateSettingsDto {
 }
 export declare class SettingsController {
     private settingsService;
+    private logger;
     constructor(settingsService: SettingsService);
-    get(req: any): Promise<import("./settings.entity").OrgSettings>;
-    update(req: any, dto: UpdateSettingsDto): Promise<import("./settings.entity").OrgSettings>;
+    get(req: any, res: any): Promise<void>;
+    update(req: any, res: any, dto: UpdateSettingsDto): Promise<void>;
 }
 export {};
