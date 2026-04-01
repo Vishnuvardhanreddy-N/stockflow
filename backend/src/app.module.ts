@@ -13,13 +13,13 @@ import { OrgSettings } from './settings/settings.entity';
 
 @Module({
   imports: [
-   TypeOrmModule.forRoot({
+  TypeOrmModule.forRoot({
   type: 'mysql',
-  host: '127.0.0.1',
-  port: 3308,
-  username: 'root',
-  password: 'password',
-  database: 'stockflow',
+  host: process.env.DB_HOST || 'localhost',
+  port: parseInt(process.env.DB_PORT) || 3306,
+  username: process.env.DB_USER || 'root',
+  password: process.env.DB_PASS || 'password',
+  database: process.env.DB_NAME || 'stockflow',
   entities: [Organization, User, Product, OrgSettings],
   synchronize: true,
 }),

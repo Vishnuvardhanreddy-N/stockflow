@@ -26,11 +26,11 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'mysql',
-                host: '127.0.0.1',
-                port: 3308,
-                username: 'root',
-                password: 'password',
-                database: 'stockflow',
+                host: process.env.DB_HOST || 'localhost',
+                port: parseInt(process.env.DB_PORT) || 3306,
+                username: process.env.DB_USER || 'root',
+                password: process.env.DB_PASS || 'password',
+                database: process.env.DB_NAME || 'stockflow',
                 entities: [organization_entity_1.Organization, user_entity_1.User, product_entity_1.Product, settings_entity_1.OrgSettings],
                 synchronize: true,
             }),
